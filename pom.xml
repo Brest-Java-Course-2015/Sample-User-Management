@@ -8,12 +8,14 @@
 
     <modules>
         <module>app-core</module>
+        <module>app-dao</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j2.version>2.1</log4j2.version>
-        <!--<skip.unit.tests>false</skip.unit.tests>-->
+        <spring.version>4.2.1.RELEASE</spring.version>
+        <hsqldb.version>2.3.3</hsqldb.version>
     </properties>
 
     <dependencyManagement>
@@ -22,6 +24,38 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>app-core</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>app-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
