@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
 
+    public static final String GET_ALL_USERS = "select * from user";
+    public static final String GET_USER_BY_ID = "select * from user where userId = ?";
+
     private JdbcTemplate jdbcTemplate;
 
     public UserDaoImpl(DataSource dataSource) {
@@ -22,21 +25,26 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("select * from user", new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet resultSet, int i) throws SQLException {
-                User user = new User();
-                user.setUserId(resultSet.getInt("userId"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                return user;
-            }
-        });
+        return jdbcTemplate.query(GET_ALL_USERS, new UserRowMapper());
     }
 
     @Override
     public User getUserById(Integer id) {
-        return null;
+        return jdbcTemplate.queryForObject(GET_USER_BY_ID, new Object[]{id}, new UserRowMapper());
     }
 
+    private class UserRowMapper implements RowMapper<User> {
+
+        public static final String USER_ID = "userId";
+        public static final String LOGIN = "login";
+
+        @Override
+        public User mapRow(ResultSet resultSet, int i) throws SQLException {
+            User user = new User();
+            user.setUserId(resultSet.getInt(USER_ID)); //Ctrl+Alt+C
+            user.setLogin(resultSet.getString(LOGIN));
+            user.setPassword(resultSet.getString("password"));
+            return user;
+        }
+    }
 }
