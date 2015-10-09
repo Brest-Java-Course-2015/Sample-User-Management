@@ -1,6 +1,9 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,8 +17,13 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
 
-    public static final String GET_ALL_USERS = "select * from user";
-    public static final String GET_USER_BY_ID = "select * from user where userId = ?";
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    @Value("${user.select}")
+    private String userSelect;
+
+    @Value("${user.selectById}")
+    private String userSelectById;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -25,12 +33,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return jdbcTemplate.query(GET_ALL_USERS, new UserRowMapper());
+        return jdbcTemplate.query(userSelect, new UserRowMapper());
     }
 
     @Override
     public User getUserById(Integer id) {
-        return jdbcTemplate.queryForObject(GET_USER_BY_ID, new Object[]{id}, new UserRowMapper());
+        LOGGER.info("id: {}", id);
+        return jdbcTemplate.queryForObject(userSelectById, new Object[]{id}, new UserRowMapper());
     }
 
     private class UserRowMapper implements RowMapper<User> {
