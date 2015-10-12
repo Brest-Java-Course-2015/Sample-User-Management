@@ -9,6 +9,7 @@
     <modules>
         <module>app-core</module>
         <module>app-dao</module>
+        <module>app-dao-api</module>
     </modules>
 
     <properties>
@@ -23,6 +24,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>app-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>app-dao-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
