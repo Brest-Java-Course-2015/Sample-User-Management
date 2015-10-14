@@ -11,6 +11,8 @@
         <module>app-core</module>
         <module>app-dao-api</module>
         <module>app-dao</module>
+        <module>app-service-api</module>
+        <module>app-service</module>
     </modules>
 
     <distributionManagement>
@@ -43,6 +45,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>app-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>app-service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>app-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
