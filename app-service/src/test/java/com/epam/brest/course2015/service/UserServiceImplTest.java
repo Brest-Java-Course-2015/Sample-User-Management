@@ -1,6 +1,7 @@
 package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.dao.UserDao;
+import com.epam.brest.course2015.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,15 @@ public class UserServiceImplTest {
 
     }
 
-    @Test
-    public void testAddUser() throws Exception {
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNullUser() throws Exception {
+        userService.addUser(null);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddUserWithNotNullId() throws Exception {
+        User user = new User();
+        user.setUserId(1);
+        userService.addUser(user);
     }
 }

@@ -5,6 +5,7 @@ import com.epam.brest.course2015.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -24,11 +25,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        LOGGER.debug("getAllUsers()");
+        return userDao.getAllUsers();
     }
 
     @Override
     public Integer addUser(User user) {
-        return null;
+        Assert.notNull(user, "User should not be null.");
+        Assert.isNull(user.getUserId());
+        Assert.notNull(user.getLogin());
+        Assert.hasText(user.getLogin());
+        return userDao.addUser(user);
     }
 }
