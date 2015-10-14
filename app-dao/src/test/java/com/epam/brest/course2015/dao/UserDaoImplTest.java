@@ -28,7 +28,7 @@ public class UserDaoImplTest {
     @Autowired
     private UserDao userDao;
 
-    private static final User user = new User(null, "userLogin3", "userPassword3", new Date());
+    private static final User user = new User(null, "userLogin3", "userPassword3", null, new Date());
 
     @Test
     public void testGetAllUsers() throws Exception {
@@ -56,9 +56,11 @@ public class UserDaoImplTest {
         Integer userId = userDao.addUser(user);
         assertNotNull(userId);
         User newUser = userDao.getUserById(userId);
+        assertNotNull(newUser);
         assertTrue(user.getLogin().equals(newUser.getLogin()));
         assertTrue(user.getPassword().equals(newUser.getPassword()));
-        assertTrue(user.getCreatedDate().equals(newUser.getCreatedDate()));
+        assertTrue(user.getUpdatedDate().equals(newUser.getUpdatedDate()));
+        assertNotNull(newUser.getCreatedDate());
     }
 
     @Test
@@ -75,6 +77,7 @@ public class UserDaoImplTest {
     @Test
     public void testDeleteUser() throws Exception {
         List<User> users = userDao.getAllUsers();
+        assertTrue(users.size() > 0);
         int sizeBefore = users.size();
         userDao.deleteUser(users.get(0).getUserId());
         assertTrue((sizeBefore - 1) == userDao.getAllUsers().size());
