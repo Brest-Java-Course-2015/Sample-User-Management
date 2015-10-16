@@ -32,13 +32,42 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");
-
-        String login = ((user.getLogin() == null) || (user.getLogin().length() == 0)) ? "empty" : user.getLogin();
-        LOGGER.debug("addUser(): user login = ",
-                ((user.getLogin() == null) || (user.getLogin().length() == 0)) ? "empty" : user.getLogin());
-        Assert.isNull(user.getUserId(), "UserId should be null.");
+        LOGGER.debug("addUser(): user login = {} ", user.getLogin());
+        Assert.isNull(user.getUserId(), "User Id should be null.");
         Assert.hasText(user.getLogin(), "User login should not be null.");
         Assert.hasText(user.getPassword(), "User password should not be null.");
         return userDao.addUser(user);
+    }
+
+    @Override
+    public User getUserById(Integer userId) {
+        LOGGER.debug("getUserByLogin(): user id = {} ", userId);
+        Assert.notNull(userId, "User Id should not be null.");
+        Assert.isTrue(userId > 0);
+        return userDao.getUserById(userId);
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        LOGGER.debug("getUserByLogin(): user login = {} ", login);
+        Assert.hasText(login, "User login should not be null.");
+        return userDao.getUserByLogin(login);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        Assert.notNull(user, "User should not be null.");
+        LOGGER.debug("updateUser(): user login = {} ", user.getLogin());
+        Assert.notNull(user.getUserId(), "User Id should not be null.");
+        Assert.hasText(user.getPassword(), "User password should not be null.");
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        LOGGER.debug("deleteUser(): user id = {} ", userId);
+        Assert.notNull(userId, "User Id should not be null.");
+        Assert.isTrue(userId > 0);
+        userDao.deleteUser(userId);
     }
 }

@@ -1,6 +1,8 @@
 package com.epam.brest.course2015.dao;
 
 import com.epam.brest.course2015.domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +24,26 @@ import static org.junit.Assert.assertTrue;
 @Transactional()
 public class UserDaoImplTest {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     public static final String USER_LOGIN1 = "userLogin1";
     public static final String USER_PASSWORD1 = "userPassword1";
 
     @Autowired
     private UserDao userDao;
 
-    private static final User user = new User(null, "userLogin3", "userPassword3", null, new Date());
+    private static final User user = new User("userLogin3", "userPassword3");
 
     @Test
     public void testGetAllUsers() throws Exception {
+        LOGGER.debug("test: getAllUsers()");
         List<User> users = userDao.getAllUsers();
         assertTrue(users.size() == 2);
     }
 
     @Test
     public void testGetUser() throws Exception {
+        LOGGER.debug("test: getUser()");
         int userId = 1;
         User user = userDao.getUserById(userId);
         assertNotNull(user);
@@ -46,6 +52,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testGetUserByLogin() throws Exception {
+        LOGGER.debug("test: getUserByLogin()");
         User user = userDao.getUserByLogin(USER_LOGIN1);
         assertNotNull(user);
         assertTrue(user.getLogin().equals(USER_LOGIN1));
@@ -53,6 +60,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddUser() throws Exception {
+        LOGGER.debug("test: addUser()");
         Integer userId = userDao.addUser(user);
         assertNotNull(userId);
         User newUser = userDao.getUserById(userId);
@@ -65,6 +73,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testUpdateUser() throws Exception {
+        LOGGER.debug("test: updateUser()");
         User user = userDao.getUserByLogin(USER_LOGIN1);
         user.setPassword(USER_PASSWORD1 + 12);
         userDao.updateUser(user);
@@ -76,6 +85,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testDeleteUser() throws Exception {
+        LOGGER.debug("test :deleteUser()");
         List<User> users = userDao.getAllUsers();
         assertTrue(users.size() > 0);
         int sizeBefore = users.size();

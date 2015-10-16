@@ -11,6 +11,14 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
+    public User getUserById(Integer userId);
+
+    public User getUserByLogin(String login);
+
     public Integer addUser(User user);
+
+    public void updateUser(User user);
+
+    public void deleteUser(Integer userId);
 
 }

@@ -15,9 +15,14 @@ public class User {
 
     private Date createdDate;
 
-    private Date updatedDate;
+    private Date updatedDate = new Date();
 
     public User() {
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public User(Integer userId, String login, String password, Date createdDate, Date updatedDate) {

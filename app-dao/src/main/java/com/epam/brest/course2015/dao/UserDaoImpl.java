@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static com.epam.brest.course2015.domain.User.UserFields.*;
@@ -25,8 +26,6 @@ import static com.epam.brest.course2015.domain.User.UserFields.*;
 public class UserDaoImpl implements UserDao {
 
     private static final Logger LOGGER = LogManager.getLogger();
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
     @Value("${user.select}")
     private String userSelect;
@@ -74,7 +73,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer addUser(User user) {
-        LOGGER.debug("addUser(user): {}", user.getLogin(), dateFormat.format(user.getUpdatedDate()));
+        LOGGER.debug("addUser(user): login = {}", user.getLogin());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insertUser, getParametersMap(user), keyHolder);
         return keyHolder.getKey().intValue();
