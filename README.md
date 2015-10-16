@@ -4,3 +4,7 @@
 - mvn site:stage
 
 Coverage Report: mvn cobertura:cobertura
+
+Start rest app:
+   cd app-rest
+   mvn jetty:run
