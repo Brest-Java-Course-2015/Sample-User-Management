@@ -32,9 +32,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer addUser(User user) {
         Assert.notNull(user, "User should not be null.");
-        Assert.isNull(user.getUserId());
-        Assert.notNull(user.getLogin());
-        Assert.hasText(user.getLogin());
+
+        String login = ((user.getLogin() == null) || (user.getLogin().length() == 0)) ? "empty" : user.getLogin();
+        LOGGER.debug("addUser(): user login = ",
+                ((user.getLogin() == null) || (user.getLogin().length() == 0)) ? "empty" : user.getLogin());
+        Assert.isNull(user.getUserId(), "UserId should be null.");
+        Assert.hasText(user.getLogin(), "User login should not be null.");
+        Assert.hasText(user.getPassword(), "User password should not be null.");
         return userDao.addUser(user);
     }
 }

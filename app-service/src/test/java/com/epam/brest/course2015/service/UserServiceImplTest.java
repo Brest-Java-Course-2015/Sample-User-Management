@@ -2,6 +2,7 @@ package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.dao.UserDao;
 import com.epam.brest.course2015.domain.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
-
+        Assert.assertTrue(userService.getAllUsers().size() > 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
