@@ -4,6 +4,7 @@ import com.epam.brest.course2015.dao.UserDao;
 import com.epam.brest.course2015.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -36,7 +37,13 @@ public class UserServiceImpl implements UserService {
         Assert.isNull(user.getUserId(), "User Id should be null.");
         Assert.hasText(user.getLogin(), "User login should not be null.");
         Assert.hasText(user.getPassword(), "User password should not be null.");
-        return userDao.addUser(user);
+
+        try {
+            userDao.getUserByLogin(user.getLogin());
+        } catch (EmptyResultDataAccessException ex) {
+            return userDao.addUser(user);
+        }
+        throw new IllegalArgumentException("User login should be unique.");
     }
 
     @Override
