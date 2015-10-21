@@ -74,4 +74,9 @@ public class UserServiceImpl implements UserService {
         Assert.isTrue(userId > 0);
         userDao.deleteUser(userId);
     }
+
+    @Override
+    public void logUser(User user) {
+        LOGGER.debug("logUser(): user id = {} ", user.getUserId());
+    }
 }
