@@ -36,6 +36,12 @@ public class User {
         this.password = password;
     }
 
+    public User(Integer userId, String login, String password) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+    }
+
     public User(Integer userId, String login, String password, Date createdDate, Date updatedDate) {
         this.userId = userId;
         this.login = login;
@@ -102,4 +108,7 @@ public class User {
 
     }
 
+    public boolean equals(Object obj) {
+        return login.equals(((User) obj).getLogin());
+    }
 }

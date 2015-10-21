@@ -50,4 +50,27 @@ public class UserServiceMockTest {
         User result = userService.getUserByLogin(user.getLogin());
         Assert.assertTrue(result == user);
     }
+
+    @Test
+    public void testAddUser() {
+        expect(mockUserDao.getCountUsers("userLogin3")).andReturn(-10);
+        expect(mockUserDao.addUser(new User("userLogin3", ""))).andReturn(5);
+        replay(mockUserDao);
+        int id = userService.addUser(user);
+        Assert.assertTrue(id == 5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddExistUser() {
+        expect(mockUserDao.getCountUsers("userLogin3")).andReturn(1);
+        replay(mockUserDao);
+        userService.addUser(user);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testGetUserByLoginException() {
+        expect(mockUserDao.getUserByLogin(user.getLogin())).andThrow(new UnsupportedOperationException());
+        replay(mockUserDao);
+        userService.getUserByLogin(user.getLogin());
+    }
 }
