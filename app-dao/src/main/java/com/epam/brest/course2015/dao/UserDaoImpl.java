@@ -28,25 +28,25 @@ public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Value("${user.select}")
-    private String userSelect;
+    private String userSelectSql;
 
     @Value("${user.selectById}")
-    private String userSelectById;
+    private String userSelectByIdSql;
 
     @Value("${user.selectByLogin}")
-    private String userSelectByLogin;
+    private String userSelectByLoginSql;
 
     @Value("${user.countUsers}")
-    private String countUser;
+    private String countUserSql;
 
     @Value("${user.insertUser}")
-    private String insertUser;
+    private String insertUserSql;
 
     @Value("${user.updateUser}")
-    private String updateUser;
+    private String updateUserSql;
 
     @Value("${user.deleteUser}")
-    private String deleteUser;
+    private String deleteUserSql;
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -59,45 +59,45 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers()");
-        return jdbcTemplate.query(userSelect, new UserRowMapper());
+        return jdbcTemplate.query(userSelectSql, new UserRowMapper());
     }
 
     @Override
     public User getUserById(Integer userId) {
         LOGGER.debug("getUserById({})", userId);
-        return jdbcTemplate.queryForObject(userSelectById, new Object[]{userId}, new UserRowMapper());
+        return jdbcTemplate.queryForObject(userSelectByIdSql, new Object[]{userId}, new UserRowMapper());
     }
 
     @Override
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserByLogin({})", login);
-        return jdbcTemplate.queryForObject(userSelectByLogin, new Object[]{login}, new UserRowMapper());
+        return jdbcTemplate.queryForObject(userSelectByLoginSql, new Object[]{login}, new UserRowMapper());
     }
 
     @Override
     public Integer getCountUsers(String login) {
         LOGGER.debug("getCountUsers(): login = {}", login);
-        return jdbcTemplate.queryForObject(countUser, new String[]{login}, Integer.class);
+        return jdbcTemplate.queryForObject(countUserSql, new String[]{login}, Integer.class);
     }
 
     @Override
     public Integer addUser(User user) {
         LOGGER.debug("addUser(user): login = {}", user.getLogin());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(insertUser, getParametersMap(user), keyHolder);
+        namedParameterJdbcTemplate.update(insertUserSql, getParametersMap(user), keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     @Override
     public void updateUser(User user) {
         LOGGER.debug("updateUser(user): {}", user.getLogin());
-        jdbcTemplate.update(updateUser, new Object[]{user.getPassword(), user.getUpdatedDate(), user.getUserId()});
+        jdbcTemplate.update(updateUserSql, new Object[]{user.getPassword(), user.getUpdatedDate(), user.getUserId()});
     }
 
     @Override
     public void deleteUser(Integer userId) {
         LOGGER.debug("deleteUser(): {}", userId);
-        jdbcTemplate.update(deleteUser, new Object[]{userId});
+        jdbcTemplate.update(deleteUserSql, new Object[]{userId});
     }
 
     private MapSqlParameterSource getParametersMap(User user) {
