@@ -45,7 +45,7 @@ public class VersionControllerMockTest {
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
         .andExpect(status().isOk())
-        ;
+        .andExpect(content().string("\"1.0\""));
     }
 
 }
