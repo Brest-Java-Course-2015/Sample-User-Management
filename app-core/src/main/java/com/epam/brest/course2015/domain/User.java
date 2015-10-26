@@ -3,12 +3,16 @@ package com.epam.brest.course2015.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 
 /**
  * Created by juga on 5.10.15.
  */
 public class User {
+
+    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
     private Integer userId;
 
@@ -90,25 +94,37 @@ public class User {
         this.updatedDate = updatedDate;
     }
 
-    public static enum UserFields {
+    public enum UserFields {
 
-        USER_ID ("userId"),
-        LOGIN ("login"),
-        PASSWORD ("password"),
-        CREATED_DATE ("createdDate"),
-        UPDATED_DATE ("updatedDate");
+        USER_ID("userId"),
+        LOGIN("login"),
+        PASSWORD("password"),
+        CREATED_DATE("createdDate"),
+        UPDATED_DATE("updatedDate");
 
-        private UserFields(String value){
+        UserFields(String value) {
             this.value = value;
         }
 
         private final String value;
 
-        public String getValue(){return value;}
+        public String getValue() {
+            return value;
+        }
 
     }
 
     public boolean equals(Object obj) {
         return login.equals(((User) obj).getLogin());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User: {" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", createdDate=" + DATE_FORMAT.format(createdDate) +
+                ", updatedDate=" + DATE_FORMAT.format(updatedDate) +
+                '}');
     }
 }

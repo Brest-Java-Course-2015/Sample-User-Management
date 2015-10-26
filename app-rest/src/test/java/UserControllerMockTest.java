@@ -70,7 +70,7 @@ public class UserControllerMockTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(user)
         ).andDo(print())
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(content().string("3"));
     }
 
