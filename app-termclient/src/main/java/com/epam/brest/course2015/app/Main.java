@@ -57,7 +57,7 @@ public class Main {
                 swValue = sc.nextInt();
                 checkValue(swValue);
             } else {
-                System.out.println("Bad value.");
+                System.out.println("Bad value: " + sc.next());
             }
         }
     }
