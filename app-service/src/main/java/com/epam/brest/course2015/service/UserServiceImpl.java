@@ -2,6 +2,7 @@ package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.dao.UserDao;
 import com.epam.brest.course2015.domain.User;
+import com.epam.brest.course2015.dto.UserDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,5 +79,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logUser(User user) {
         LOGGER.debug("logUser(): user id = {} ", user.getUserId());
+    }
+
+    @Override
+    public UserDto getUserDto() {
+        return null;
     }
 }
