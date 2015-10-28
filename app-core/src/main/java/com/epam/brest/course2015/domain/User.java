@@ -18,7 +18,7 @@ public class User {
 
     private String login;
 
-    @JsonIgnore
+    //@JsonIgnore
     private String password;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
