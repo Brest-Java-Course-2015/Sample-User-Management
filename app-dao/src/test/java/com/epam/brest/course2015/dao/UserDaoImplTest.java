@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -75,6 +76,14 @@ public class UserDaoImplTest {
         Integer usersCount = userDao.getCountUsers(login);
         assertNotNull(usersCount);
         assertTrue(usersCount.equals(0));
+    }
+
+    @Test
+    public void testTotalUsersCount() throws Exception {
+        LOGGER.debug("test: totalUsersCount()");
+        Integer length = userDao.getAllUsers().size();
+        Integer usersCount = userDao.getTotalUsersCount();
+        assertEquals(length,usersCount);
     }
 
     @Test

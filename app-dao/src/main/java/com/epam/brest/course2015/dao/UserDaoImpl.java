@@ -39,6 +39,9 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.countUsers}")
     private String countUserSql;
 
+    @Value("${user.totalUsersCount}")
+    private String totalUsersCountSql;
+
     @Value("${user.insertUser}")
     private String insertUserSql;
 
@@ -78,6 +81,11 @@ public class UserDaoImpl implements UserDao {
     public Integer getCountUsers(String login) {
         LOGGER.debug("getCountUsers(): login = {}", login);
         return jdbcTemplate.queryForObject(countUserSql, new String[]{login}, Integer.class);
+    }
+
+    public Integer getTotalUsersCount() {
+        LOGGER.debug("getTotalUsersCount()");
+        return jdbcTemplate.queryForObject(totalUsersCountSql, Integer.class);
     }
 
     @Override

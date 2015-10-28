@@ -17,6 +17,8 @@ public interface UserDao {
 
     public Integer getCountUsers(String login);
 
+    public Integer getTotalUsersCount();
+
     public Integer addUser(User user);
 
     public void updateUser(User user);

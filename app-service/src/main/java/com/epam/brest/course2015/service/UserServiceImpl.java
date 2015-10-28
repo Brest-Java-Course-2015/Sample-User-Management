@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -83,6 +84,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserDto() {
-        return null;
+        UserDto userDto = new UserDto();
+        userDto.setTotal(userDao.getTotalUsersCount());
+        if (userDto.getTotal() > 0) {
+            userDto.setUsers(userDao.getAllUsers());
+        } else {
+            userDto.setUsers(Collections.<User>emptyList());
+        }
+        return userDto;
     }
 }
