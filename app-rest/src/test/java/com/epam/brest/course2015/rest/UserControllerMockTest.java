@@ -1,7 +1,10 @@
+package com.epam.brest.course2015.rest;
+
 import com.epam.brest.course2015.domain.User;
 import com.epam.brest.course2015.dto.UserDto;
 import com.epam.brest.course2015.rest.UserRestController;
 import com.epam.brest.course2015.rest.VersionController;
+import com.epam.brest.course2015.rest.config.RestTestConfig;
 import com.epam.brest.course2015.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.easymock.EasyMock;
@@ -14,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
@@ -30,10 +34,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 /**
- * Created by juga on 23.10.15.
+ * UserController Mock Test
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-rest-mock.xml"})
+@WebAppConfiguration
+@ContextConfiguration(classes = RestTestConfig.class)
 public class UserControllerMockTest {
 
     @Resource

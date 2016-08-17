@@ -1,4 +1,7 @@
+package com.epam.brest.course2015.rest;
+
 import com.epam.brest.course2015.rest.VersionController;
+import com.epam.brest.course2015.rest.config.RestTestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -20,10 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 /**
- * Created by juga on 23.10.15.
+ * VersionController Mock Test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-rest-mock.xml"})
+@WebAppConfiguration
+@ContextConfiguration(classes = RestTestConfig.class)
 public class VersionControllerMockTest {
 
     @Resource
