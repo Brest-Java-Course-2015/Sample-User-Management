@@ -1,5 +1,7 @@
 package com.epam.brest.course2015.dao;
 
+import com.epam.brest.course2015.dao.com.epam.brest.course2015.dao.config.DaoTestConfig;
+import com.epam.brest.course2015.dao.config.DataTestConfig;
 import com.epam.brest.course2015.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,18 +12,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
- * Created by juga on 7.10.15.
+ * DAO test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-dao.xml"})
+@ContextConfiguration(classes = DaoTestConfig.class)
 @Transactional()
 public class UserDaoImplTest {
 
@@ -83,7 +82,7 @@ public class UserDaoImplTest {
         LOGGER.debug("test: totalUsersCount()");
         Integer length = userDao.getAllUsers().size();
         Integer usersCount = userDao.getTotalUsersCount();
-        assertEquals(length,usersCount);
+        assertEquals(length, usersCount);
     }
 
     @Test

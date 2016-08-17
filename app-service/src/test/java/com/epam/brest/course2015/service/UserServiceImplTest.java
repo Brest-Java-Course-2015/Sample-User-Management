@@ -2,6 +2,7 @@ package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.domain.User;
 import com.epam.brest.course2015.dto.UserDto;
+import com.epam.brest.course2015.service.com.epam.brest.course2015.service.config.ServiceTestConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -13,10 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by juga on 14.10.15.
+ * UserServiceImpl Test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-service.xml"})
+@ContextConfiguration(classes = ServiceTestConfig.class)
 @Transactional()
 public class UserServiceImplTest {
 

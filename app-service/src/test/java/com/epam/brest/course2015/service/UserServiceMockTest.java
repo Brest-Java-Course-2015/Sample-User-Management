@@ -2,6 +2,7 @@ package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.dao.UserDao;
 import com.epam.brest.course2015.domain.User;
+import com.epam.brest.course2015.service.com.epam.brest.course2015.service.config.ServiceWithMockDaoTestConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -15,16 +16,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.easymock.EasyMock.*;
 
 /**
- * Created by juga on 21.10.15.
+ * UserService Mock Test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-service-mock.xml"})
+@ContextConfiguration(classes = ServiceWithMockDaoTestConfig.class)
 public class UserServiceMockTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private UserDao mockUserDao;
